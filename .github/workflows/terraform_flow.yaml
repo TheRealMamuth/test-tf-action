@@ -1,0 +1,35 @@
+name: "Manual terraform workflow"
+
+on:
+  workflow_dispatch:
+  #push:
+  #  branches:
+  #    - main
+  #pull_request:
+  #  branches:
+  #    - main
+  #pull_request_target:
+  #  branches:
+  #    - master
+
+jobs:
+  terraform_fmt:
+    name: "Terraform fmt"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        
+  terraform_validate:
+    name: "Terraform validate"
+    runs-on: ubuntu-latest
+    steps:
+  terraform_plan:
+    name: "Terraform plan"
+    runs-on: ubuntu-latest
+    steps:
+  terraform_apply:
+    name: "Terraform apply"
+    runs-on: ubuntu-latest
+    steps:
