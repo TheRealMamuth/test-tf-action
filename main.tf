@@ -17,3 +17,24 @@ resource "digitalocean_droplet" "main" {
   size     = "s-1vcpu-1gb"
   vpc_uuid = digitalocean_vpc.main.id
 }
+
+module "vpc" {
+  source = "./vpc_module"
+
+  vpc_name = "my-vpc-module"
+  vpc_region = var.region
+  vpc_desc = "My VPC Module"
+}
+
+module "vm" {
+  source = "./module/vm"
+
+  region = var.region
+  vpc_id = module.vpc.vpc_id
+}
+
+module "firewall" {
+    source = "./module/firewall"
+    
+    droplets_ids = [module.vm.droplet_id]
+}
