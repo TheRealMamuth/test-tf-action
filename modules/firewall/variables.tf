@@ -4,8 +4,8 @@ variable "droplets_ids" {
 
 variable "inbound_rules" {
   type = set(object({
-    protocol   = string
-    port_range = string
+    protocol         = string
+    port_range       = string
     source_addresses = list(string)
   }))
   default = []
@@ -13,8 +13,8 @@ variable "inbound_rules" {
 
 variable "outbound_rules" {
   type = set(object({
-    protocol   = string
-    port_range = string
+    protocol              = string
+    port_range            = string
     destination_addresses = list(string)
   }))
   default = []
