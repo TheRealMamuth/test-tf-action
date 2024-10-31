@@ -76,6 +76,12 @@ jobs:
         run: |
           terraform plan -input=false -out=tfplan
 
+      - name: "Upload plan"
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: tfplan
+
   terraform_apply:
     name: "Terraform apply"
     runs-on: ubuntu-latest
@@ -88,6 +94,11 @@ jobs:
         with:
           terraform_version: 1.9.8
           cli_config_credentials_token: ${{ secrets.TF_API_KEY }}
+
+      - name: "Download plan"
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
 
       - name: "Terraform init"
         run: |
