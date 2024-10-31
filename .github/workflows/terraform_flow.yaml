@@ -77,9 +77,27 @@ jobs:
         with:
           name: tfplan
           path: tfplan
+  
+  approval:
+    needs: [terraform_plan]
+    name: "Approval"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Await Approval
+        uses: trstringer/manual-approval@v1.9.1
+        with:
+          approvers: 'TheRealMamuth'  # Podaj GitHub username osoby zatwierdzającej
+          minimum-approvals: 1
+          secret: ${{ secrets.API_TOKEN_GH }}
+          issue-title: "Zakceplu nowy plan"
+          issue-body: "Zatwierdź nowy plan"
+          exclude-workflow-initiator-as-approver: false
+          additional-approved-words: 'TAK,tak'
+          additional-denied-words: 'NIE,nie'
+          timeout-minutes: 60
 
   terraform_apply:
-    needs: [terraform_plan]
+    needs: [terraform_plan, approval]
     name: "Terraform apply"
     runs-on: ubuntu-latest
     steps:
