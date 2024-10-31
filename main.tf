@@ -37,4 +37,20 @@ module "firewall" {
   source = "./modules/firewall"
 
   droplets_ids = [module.vm.vpc_id]
+
+  inbound_rules = [
+        {
+        protocol        = "tcp"
+        port_range      = "80"
+        source_addresses = ["0.0.0.0/0"]
+        }
+    ]
+
+  outbound_rules = [
+        {
+        protocol        = "tcp"
+        port_range      = "80"
+        destination_addresses = ["0.0.0.0/0"]
+        }
+    ]
 }

@@ -3,7 +3,7 @@ variable "droplets_ids" {
 }
 
 variable "inbound_rules" {
-  type = set(object({
+  type = list(object({
     protocol         = string
     port_range       = string
     source_addresses = list(string)
@@ -12,7 +12,7 @@ variable "inbound_rules" {
 }
 
 variable "outbound_rules" {
-  type = set(object({
+  type = list(object({
     protocol              = string
     port_range            = string
     destination_addresses = list(string)
