@@ -21,9 +21,9 @@ resource "digitalocean_droplet" "main" {
 module "vpc" {
   source = "./vpc_module"
 
-  vpc_name = "my-vpc-module"
+  vpc_name   = "my-vpc-module"
   vpc_region = var.region
-  vpc_desc = "My VPC Module"
+  vpc_desc   = "My VPC Module"
 }
 
 module "vm" {
@@ -34,7 +34,7 @@ module "vm" {
 }
 
 module "firewall" {
-    source = "./module/firewall"
-    
-    droplets_ids = [module.vm.droplet_id]
+  source = "./modules/firewall"
+
+  droplets_ids = [module.vm.droplet_id]
 }
