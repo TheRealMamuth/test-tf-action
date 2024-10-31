@@ -2,15 +2,15 @@ name: "Manual terraform workflow"
 
 on:
   workflow_dispatch:
-  #push:
-  #  branches:
-  #    - main
-  #pull_request:
-  #  branches:
-  #    - main
-  #pull_request_target:
-  #  branches:
-  #    - master
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  pull_request_target:
+    branches:
+      - main
 
 jobs:
   terraform_fmt:
@@ -81,6 +81,7 @@ jobs:
   approval:
     needs: [terraform_plan]
     name: "Approval"
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Await Approval
@@ -100,6 +101,7 @@ jobs:
     needs: [terraform_plan, approval]
     name: "Terraform apply"
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
