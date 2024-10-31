@@ -36,5 +36,5 @@ module "vm" {
 module "firewall" {
   source = "./modules/firewall"
 
-  droplets_ids = [module.vm.droplet_id]
+  droplets_ids = [module.vm.vpc_id]
 }
