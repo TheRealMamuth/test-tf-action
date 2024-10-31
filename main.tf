@@ -4,7 +4,7 @@ resource "digitalocean_project" "main" {
   environment = "development"
 }
 
-resource "digitaocean_vpc" "main" {
+resource "digitalocean_vpc" "main" {
   name        = "my-vpc"
   region      = "fra1"
   description = "My VPC"
