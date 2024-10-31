@@ -20,11 +20,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-        
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+          cli_config_credentials_token: ${{ secrets.TF_API_KEY }}
+
+      - name: "Terraform init"
+        run: |
+          terraform init -backend=false
+
+      - name: "Terraform fmt"
+        run: |
+          terraform fmt -check -recursive
+
   terraform_validate:
     name: "Terraform validate"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+          cli_config_credentials_token: ${{ secrets.TF_API_KEY }}
+
+      - name: "Terraform init"
+        run: |
+          terraform init -backend=false
+
+      - name: "Terraform validate"
+        run: |
+          terraform validate
+          
   terraform_plan:
     name: "Terraform plan"
     runs-on: ubuntu-latest
