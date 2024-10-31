@@ -1,11 +1,11 @@
 variable "api" {
-  type = string
+  type        = string
   description = "value of DigitalOcean token"
-  sensitive = true
+  sensitive   = true
 }
 
 variable "region" {
-  type = string
+  type        = string
   description = "value of DigitalOcean region"
-  default = "fra1"
+  default     = "fra1"
 }
